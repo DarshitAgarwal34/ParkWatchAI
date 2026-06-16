@@ -193,7 +193,10 @@ for detailed setup instructions.
 ---
 
 ## 👥 Team
-
+Darshit Agarwal
+Yatish Singhal
+Yashasvi Saini
+Harshit Singh
 Built as part of a Smart Mobility / Intelligent Traffic Enforcement Hackathon project.
 
 ---
