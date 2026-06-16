@@ -357,7 +357,6 @@ and start exploring ParkWatch AI.
 - Yatish Singhal
 - Yashasvi Saini
 - Harshit Singh
-Built as part of a Smart Mobility / Intelligent Traffic Enforcement Hackathon project.
 
 ---
 
