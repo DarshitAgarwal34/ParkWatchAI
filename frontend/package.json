@@ -1,0 +1,28 @@
+{
+  "name": "parkwatch-ai-frontend",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "next": "^15.0.3",
+    "react": "^19.0.0-rc-66855b960d-20241106",
+    "react-dom": "^19.0.0-rc-66855b960d-20241106",
+    "lucide-react": "^0.460.0",
+    "recharts": "^2.13.3",
+    "leaflet": "^1.9.4",
+    "react-leaflet": "^4.2.1",
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^2.5.4",
+    "class-variance-authority": "^0.7.0"
+  },
+  "devDependencies": {
+    "postcss": "^8.4.49",
+    "tailwindcss": "^4.0.0-alpha.30",
+    "@tailwindcss/postcss": "^4.0.0-alpha.30"
+  }
+}

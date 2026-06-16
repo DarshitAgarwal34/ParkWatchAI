@@ -1,0 +1,10 @@
+{
+  "/page": "app/page.js",
+  "/map/page": "app/map/page.js",
+  "/recommendations/page": "app/recommendations/page.js",
+  "/records/page": "app/records/page.js",
+  "/stations/page": "app/stations/page.js",
+  "/offenders/page": "app/offenders/page.js",
+  "/analytics/page": "app/analytics/page.js",
+  "/login/page": "app/login/page.js"
+}
