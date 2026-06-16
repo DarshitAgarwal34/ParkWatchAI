@@ -79,6 +79,8 @@ def get_type_breakdowns(
     db: Session = Depends(get_db)
 ):
     """Retrieves categorical breakdown by violation type and vehicle type with filtering."""
+    import json
+
     # Violation Type query
     vt_query = db.query(
         Violation.violation_type,
@@ -90,6 +92,46 @@ def get_type_breakdowns(
                                .order_by(func.count(Violation.id).desc())\
                                .all()
      
+    # Process violation type counts (flatten arrays/lists of strings)
+    vt_counts = {}
+    for vt_raw, count in violation_types:
+        if not vt_raw:
+            vt_counts["UNKNOWN"] = vt_counts.get("UNKNOWN", 0) + count
+            continue
+            
+        vt_raw = vt_raw.strip()
+        if not vt_raw:
+            vt_counts["UNKNOWN"] = vt_counts.get("UNKNOWN", 0) + count
+            continue
+            
+        parsed_types = []
+        if vt_raw.startswith("[") and vt_raw.endswith("]"):
+            try:
+                parsed = json.loads(vt_raw)
+                if isinstance(parsed, list):
+                    parsed_types = [str(x).strip() for x in parsed if x]
+                else:
+                    parsed_types = [str(parsed).strip()]
+            except Exception:
+                # Fallback to splitting if JSON load fails
+                parsed_types = [x.strip() for x in vt_raw.replace("[", "").replace("]", "").split(",") if x.strip()]
+        else:
+            if "," in vt_raw:
+                parsed_types = [x.strip() for x in vt_raw.split(",") if x.strip()]
+            else:
+                parsed_types = [vt_raw]
+                
+        for t in parsed_types:
+            t_clean = t.replace('"', '').replace("'", "").strip().upper()
+            if t_clean:
+                vt_counts[t_clean] = vt_counts.get(t_clean, 0) + count
+            else:
+                vt_counts["UNKNOWN"] = vt_counts.get("UNKNOWN", 0) + count
+
+    # Convert to list sorted by count descending
+    violation_type_dist = [{"type": k, "count": v} for k, v in vt_counts.items()]
+    violation_type_dist.sort(key=lambda x: x["count"], reverse=True)
+
     # Vehicle Type query
     v_query = db.query(
         Violation.vehicle_type,
@@ -102,6 +144,6 @@ def get_type_breakdowns(
                            .all()
      
     return {
-        "violation_type_distribution": [{"type": vt[0] or "UNKNOWN", "count": vt[1]} for vt in violation_types],
-        "vehicle_type_distribution": [{"type": vt[0] or "UNKNOWN", "count": vt[1]} for vt in vehicle_types]
+        "violation_type_distribution": violation_type_dist,
+        "vehicle_type_distribution": [{"type": vt[0].strip().upper() if vt[0] else "UNKNOWN", "count": vt[1]} for vt in vehicle_types]
     }
