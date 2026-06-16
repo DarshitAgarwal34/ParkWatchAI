@@ -171,13 +171,173 @@ ParkWatch-AI/
 
 ## 🚀 Running the Project
 
-Refer to:
+# 🚀 ParkWatch AI - Run Instructions
 
-```text
-RUN_STEPS.md
+## Prerequisites
+
+Install:
+
+- Python 3.10+
+- Node.js 18+
+- MySQL
+- npm
+
+---
+
+# Backend Setup
+
+Open the project in VS Code (or any IDE).
+
+Navigate to the backend folder.
+
+---
+
+## Step 1: Install Python Dependencies
+
+```bash
+pip install -r requirements.txt
 ```
 
-for detailed setup instructions.
+---
+
+## Step 2: Run Main Setup Script
+
+```bash
+python main.py
+```
+
+---
+
+## Step 3: Seed Database
+
+```bash
+python seed_db.py
+```
+
+---
+
+## Step 4: Start FastAPI Server
+
+```bash
+uvicorn app.main:app --reload --port 8080
+```
+
+Backend will be available at:
+
+```text
+http://localhost:8080
+```
+
+API Docs:
+
+```text
+http://localhost:8080/docs
+```
+
+---
+
+# Frontend Setup
+
+Open a new PowerShell / Terminal.
+
+Navigate to frontend directory:
+
+```bash
+cd frontend
+```
+
+---
+
+## Step 1: Install Dependencies
+
+```bash
+npm install --legacy-peer-deps
+```
+
+---
+
+## Step 2: Start Frontend
+
+```bash
+npm run dev
+```
+
+Frontend will be available at:
+
+```text
+http://localhost:3000
+```
+
+---
+
+# Application Flow
+
+```text
+MySQL Database
+       │
+       ▼
+ FastAPI Backend
+       │
+       ▼
+ Next.js Frontend
+       │
+       ▼
+ User Dashboard
+```
+
+---
+
+# Troubleshooting
+
+## Port Already In Use
+
+Change FastAPI port:
+
+```bash
+uvicorn app.main:app --reload --port 8081
+```
+
+or stop the existing process.
+
+---
+
+## Missing Packages
+
+Reinstall dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+and
+
+```bash
+npm install --legacy-peer-deps
+```
+
+---
+
+## API Not Connecting
+
+Verify backend is running:
+
+```text
+http://localhost:8080/docs
+```
+
+If the API docs page opens, the backend is working correctly.
+
+---
+
+# You're Ready 🎉
+
+Open:
+
+```text
+http://localhost:3000
+```
+
+and start exploring ParkWatch AI.
 
 ---
 
@@ -193,10 +353,10 @@ for detailed setup instructions.
 ---
 
 ## 👥 Team
-Darshit Agarwal
-Yatish Singhal
-Yashasvi Saini
-Harshit Singh
+- Darshit Agarwal
+- Yatish Singhal
+- Yashasvi Saini
+- Harshit Singh
 Built as part of a Smart Mobility / Intelligent Traffic Enforcement Hackathon project.
 
 ---
